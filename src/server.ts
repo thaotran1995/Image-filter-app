@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
-const {resolve} = require('path');
 
 (async () => {
 
@@ -17,18 +16,17 @@ const {resolve} = require('path');
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   app.get( "/filteredimage", async ( req: express.Request, res: express.Response) => {
     const image_url: string = req.query.image_url as string;
-    let list_image_url : Array<string> = [];
+    let list_image_url: Array<string> = [];
     // validate the image_url query
     if(!image_url){
       return res.status(400).send(`image_url is required`);
     }
     // Call filterImageFromURL(image_url) to filter the image
-    const resultPath = await filterImageFromURL(image_url);
+    const resultPath: string = await filterImageFromURL(image_url);
     if(!!resultPath){
       list_image_url.push(resultPath);
       res.status(200).sendFile(resultPath, async () => await deleteLocalFiles(list_image_url));
     }
-    
   });
 
   // Root Endpoint
