@@ -15,7 +15,7 @@ const {resolve} = require('path');
   app.use(bodyParser.json());
 
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
-  app.get( "/filteredimage", async ( req, res) => {
+  app.get( "/filteredimage", async ( req: express.Request, res: express.Response) => {
     const image_url: string = req.query.image_url as string;
     let list_image_url : Array<string> = [];
     // validate the image_url query
@@ -32,7 +32,7 @@ const {resolve} = require('path');
   });
 
   // Root Endpoint
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: express.Request, res: express.Response ) => {
     res.send("Hello I'm Alita ThaoTT26 From FPT")
   } );
 
